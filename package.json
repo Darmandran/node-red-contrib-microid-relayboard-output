@@ -1,0 +1,13 @@
+{
+    "name"         : "node-red-contrib-microid-relay-board-output",
+    "version"      : "1.1.1",
+    "description"  : "MicroID Relay-Board ver. 1.0",
+    "dependencies": {
+     },
+    "keywords": [ "node-red", "microid" ],
+    "node-red"     : {
+        "nodes": {
+            "Relay-Board-Output": "Relay-Board-Output.js"
+        }
+    }
+}

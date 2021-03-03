@@ -1,0 +1,75 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Relay-Board-Output',{
+        category: 'MicroID Sdn Bhd',
+        color: '#7dc2f0',
+        defaults: {
+          name: {value:""},
+          state: {value:"ON"},
+          board: {value:"MID16RELAY"},
+          MAC:{value:"16RELAY-0000"},
+          relay:{value:1}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            // return this.name||"IO-Board";
+            return this.name || this.MAC + ": " + this.relay;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="Relay-Board-Output">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-board"><i class="fa fa-microchip"></i> Device</label>
+        <select type="text" id="node-input-board" style="width: 300px;">
+            <option value="MID16RELAY">RELAY16-Board</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-MAC"><i class="fa fa-cog"></i> MAC/ID</label>
+        <input type="text" id="node-input-MAC" placeholder="MAC">
+    </div>
+    <div class="form-row">
+        <label for="node-input-relay"><i class="fa fa-wrench"></i> Relay</label>
+        <select type="text" id="node-input-relay" style="width: 150px;">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-state"><i class="fa fa-lightbulb-o"></i> State</label>
+        <select type="text" id="node-input-state" style="width: 180px;">
+            <option value="ON">ON</option>
+            <option value="OFF">OFF</option>
+            <option value="PULSE">PULSE</option>
+            <option value="TOGGLE">TOGGLE</option>
+            <option value="MOMENTARY">MOMENTARY</option>
+            <option value="LIFT-MOMENTARY">LIFT-MOMENTARY</option>
+            <option value="STATUS">BOARD STATUS</option>
+            <option value="boolean">msg.payload</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="Relay-Board-Output">
+    <p>A simple node that converts the message payloads into all Relay-Board characters</p>
+</script>
