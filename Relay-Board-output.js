@@ -41,8 +41,6 @@ module.exports = function(RED) {
 			}else if(state=="MOMENTARY"){	
 				msg.payload = {model,nFunction:"setRelayTimerOn",arguments:[board,MAC,relay,second]};
 				// msg.payload = {model,nFunction:"setRelayTimerOn",arguments:[board,MAC,relay,second,minute,hour]};
-			// }else if(state=="LIFT-ON"){	
-			// 	msg.payload = {model,nFunction:"setRelayLiftOn",arguments:[board,MAC,relay]};
 			}else if(state=="LIFT-MOMENTARY"){	
 				msg.payload = {model,nFunction:"setRelayLiftTimerOn",arguments:[board,MAC,relay,second]};
         	}else if(state==false){
