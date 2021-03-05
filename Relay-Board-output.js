@@ -8,7 +8,6 @@ module.exports = function(RED) {
 		// this.ioplugin = RED.nodes.getNode(n.board);
         var node = this;
         this.on('input', function(msg) {
-        	// console.log({node,msg})
         	// {"model":"ioBoard","nFunction":"setRLY1","arguments":["IOBOARD-v1","MICROID-05RO",false]}
         	var state = config.state;
         	var board = node.board;
@@ -19,7 +18,7 @@ module.exports = function(RED) {
         		state = true
 			}else if(state =="OFF" || state == false || state =="false" || state == 0){
         		state = false
-        	}else if(state == "BOARD STATUS"){
+        	}else if(state == "STATUS"){
         		state = "STAT"
         	}
 
@@ -27,8 +26,12 @@ module.exports = function(RED) {
 			var minute = msg.min || ""
 			var hour = msg.hr || ""
 
+			
         	var relay = config.relay || "";
 			var model = "relay16board"
+
+			relay = {["relay"+relay]:true}
+
         	if(state=="STAT"){
 				msg.payload = {model,nFunction:"getBoardStatus",arguments:[board,MAC]};
 			}else if(state=="PULSE"){
@@ -36,7 +39,8 @@ module.exports = function(RED) {
 			}else if(state=="TOGGLE"){
 				msg.payload = {model,nFunction:"setRelayToggle",arguments:[board,MAC,relay]};
 			}else if(state=="MOMENTARY"){	
-				msg.payload = {model,nFunction:"setRelayTimerOn",arguments:[board,MAC,relay,second,minute,hour]};
+				msg.payload = {model,nFunction:"setRelayTimerOn",arguments:[board,MAC,relay,second]};
+				// msg.payload = {model,nFunction:"setRelayTimerOn",arguments:[board,MAC,relay,second,minute,hour]};
 			// }else if(state=="LIFT-ON"){	
 			// 	msg.payload = {model,nFunction:"setRelayLiftOn",arguments:[board,MAC,relay]};
 			}else if(state=="LIFT-MOMENTARY"){	
@@ -47,8 +51,7 @@ module.exports = function(RED) {
         		msg.payload = {model,nFunction:"setRelayPlusOn",arguments:[board,MAC,relay]};
         	}
             
-            msg.service = "socketiot/ioBoardApi/";
-            // console.log(msg)
+            msg.service = "socketiot/relay16boardApi/";
             // msg.payload = {name:node.name,board:node.board,state:node.state,MAC:node.MAC}
             node.send(msg);
         });
